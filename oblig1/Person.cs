@@ -70,8 +70,8 @@ namespace oblig1
             //    description += string.Format("{0} {1} (Id={2}) Født: {3} Død: {4} Far: {5} (Id={6}) Mor: {7} (Id={8}",
             //        FirstName, LastName, Id, BirthYear, DeathYear, Father.FirstName, Father.Id, Mother.FirstName, Mother.Id);
             //}
-
-              return description;
+            var text = description.Trim();
+              return text;
 
             
         }

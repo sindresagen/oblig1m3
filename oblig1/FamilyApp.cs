@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace oblig1
 {
-    class FamilyApp
+    public class FamilyApp
     {
         public List<Person> People;
 
@@ -33,15 +33,41 @@ Welcome!";
 
         private string ShowPersonById(string command)
         {
+            var children = new List<Person>();
+            var text = "";
             var searchId = Int32.Parse(command.Substring(4));
             for (var i = 0; i < People.Count; i++)
             {
                 if (People[i].Id == searchId)
                 {
-                    return People[i].GetDescription();
+                    text += People[i].GetDescription() + "\n";
+                }
+
+                if (People[i].Father != null)
+                {
+                    if (People[i].Father.Id == searchId)
+                    {
+                        children.Add(People[i]);
+                    }
+                }
+                if (People[i].Mother != null)
+                {
+                    if (People[i].Mother.Id == searchId)
+                    {
+                        children.Add(People[i]);
+                    }
                 }
             }
-            return "";
+
+            if (children.Count != 0)
+            {
+                text += "  Barn:\n";
+                for (var i = 0; i < children.Count; i++)
+                {
+                    text += $"    {children[i].FirstName} (Id={children[i].Id}) Født: {children[i].BirthYear}\n";
+                }
+            }
+            return text;
         }
 
         private string ShowListe()
